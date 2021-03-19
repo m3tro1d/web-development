@@ -1,8 +1,17 @@
+/* Globals */
 *
 {
     margin: 0;
     padding: 0;
 }
+
+.has-floating:after
+{
+    content: '';
+    display: block;
+    clear: both;
+}
+
 
 /* Overall page */
 .page
@@ -14,29 +23,34 @@
 
 
 /* Header */
-.header
+.page__header
 {
-    margin-bottom: 41px;
+    margin-bottom: 45px;
 }
 
 .header__photo
 {
-    margin-right: 56px;
-}
-
-.header__photo,
-.quote
-{
-    display: inline-block;
+    float: left;
+    margin-right: 60px;
 }
 
 .quote
 {
-    width: 590px;
     vertical-align: top;
     background-image: url('../images/quotes.png');
     background-repeat: no-repeat;
     background-position: 0 50px;
+}
+
+.header__photo,
+.header__quote
+{
+    display: inline-block;
+}
+
+.header__quote
+{
+    width: 590px;
 }
 
 .quote__text
@@ -58,29 +72,23 @@
 
 /* Content */
 .aside,
-.text
+.content__text
 {
     display: inline-block;
     vertical-align: top;
-    position: relative;
-}
-
-.aside
-{
-    left: -574px;
-}
-
-.text
-{
-    left: 390px;
 }
 
 
 /* Aside content */
 .aside
 {
+    float: left;
+}
+
+.content__aside
+{
     width: 330px;
-    margin-right: 56px;
+    margin-right: 60px;
 }
 
 .aside__heading
@@ -96,6 +104,10 @@
     color: #555555;
     list-style-position: inside;
     padding-left: 0;
+}
+
+.aside__list
+{
     margin-bottom: 41px;
 }
 
