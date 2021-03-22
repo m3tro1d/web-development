@@ -111,13 +111,13 @@
     margin-bottom: 41px;
 }
 
-.ul
+.markered-list
 {
     list-style-type: none;
     margin-top: 13px;
 }
 
-.ul__item
+.markered-list__item
 {
     background: url('../images/marker.png') 0 50% no-repeat;
     margin-left: 4px;
