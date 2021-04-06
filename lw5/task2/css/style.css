@@ -70,6 +70,7 @@
     height: 50px;
     border-radius: 5px;
     border: none;
+    outline: none;
     background-color: #15A98C;
     font: 19px/32px Georgia, serif;
     color: #F5F5F5;
@@ -396,12 +397,8 @@
     border: 2px solid #C9C9C9;
     border-radius: 3px;
     padding: 7px 20px;
-    outline: none;
-}
-
-.contact-form__item
-{
     margin-top: 3px;
+    outline: none;
 }
 
 .contact-form__text:focus
