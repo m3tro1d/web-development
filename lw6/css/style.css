@@ -210,6 +210,7 @@
 .page-about__rest
 {
     margin-bottom: 30px;
+    padding: 0 8%;
 }
 
 .page-about__top
@@ -221,7 +222,7 @@
 .top__photo
 {
     display: block;
-    margin: 0 auto 20px auto;
+    margin: 0 auto;
     max-width: 95%;
 }
 
@@ -246,6 +247,12 @@
     color: #FFFFFF;
     margin-top: 2px;
     margin-left: 6px;
+}
+
+.page-about__main
+{
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .rest__heading1
@@ -279,7 +286,6 @@
 .aside__heading
 {
     margin-bottom: 12px;
-    text-align: center;
 }
 
 .markered-list
@@ -298,7 +304,6 @@
 .aside__list
 {
     margin-bottom: 20px;
-    margin-left: 40px;
 }
 
 
@@ -314,7 +319,7 @@
 .page-movies__heading
 {
     margin-top: 5px;
-    margin-bottom: 7px;
+    margin-bottom: 20px;
     text-align: center;
 }
 
@@ -328,7 +333,8 @@
 .movie-container__movie
 {
     width: 95%;
-    margin-top: 20px;
+    margin-bottom: 60px;
+    max-width: 400px;
 }
 
 .movie-container__heading
@@ -358,7 +364,7 @@
 
 .page-movies__all-button
 {
-    margin: 20px auto 0 auto;
+    margin: 50px auto 0 auto;
 }
 
 
@@ -389,8 +395,8 @@
 
 .page-contact__contact-form
 {
-    width: 96%;
-    padding: 2%;
+    width: 80%;
+    padding: 0 10%;
     display: flex;
     flex-direction: column;
     align-self: flex-end;
@@ -541,16 +547,6 @@
         width: 70%;
     }
 
-    .aside__heading
-    {
-        text-align: left;
-    }
-
-    .aside__list
-    {
-        margin-left: 5px;
-    }
-
     .page-contact__contact-form
     {
         width: 90%;
@@ -567,6 +563,13 @@
     {
         font-size: 36px;
     }
+
+    .page-contact__contact-form
+    {
+        width: 40%;
+        margin-left: 30%;
+    }
+
 
     .contact-form__message
     {
@@ -603,15 +606,25 @@
         padding: 20px;
     }
 
+    .page-movies__movie-container
+    {
+        flex-flow: row wrap;
+        align-items: flex-start;
+        justify-content: space-around;
+    }
+
     .movie-container__movie
     {
-        width: 90%;
+        width: 40%;
+        max-width: 100%;
     }
 
     .page-contact__contact-form
     {
-        width: 75%;
+        width: 32%;
+        margin-left: 32.5%;
     }
+
 
     .page-contact__header
     {
@@ -683,12 +696,14 @@
         display: flex;
         flex-direction: row-reverse;
         justify-content: space-between;
+        padding: 0;
     }
 
     .page-about__main
     {
         flex-shrink: 50;
         margin-top: -10%;
+        margin-bottom: 0;
         width: 59.8%;
     }
 
@@ -699,7 +714,6 @@
 
     .aside__list
     {
-        margin-left: 0;
         margin-bottom: 41px;
     }
 
@@ -729,6 +743,7 @@
     {
         width: 24%;
         max-width: 285px;
+        margin-top: 20px;
     }
 
     .movie-container__preview
@@ -750,7 +765,7 @@
 
     .page-movies__all-button
     {
-        margin-top: 54px;
+        margin-top: -6px;
         margin-left: 44.15%;
     }
 
