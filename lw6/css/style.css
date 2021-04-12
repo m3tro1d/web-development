@@ -479,7 +479,7 @@
 .contact-form__message
 {
     resize: none;
-    width: 85%;
+    width: calc(100% - 44px);
     height: 225px;
 }
 
@@ -568,12 +568,6 @@
     {
         width: 40%;
         margin-left: 30%;
-    }
-
-
-    .contact-form__message
-    {
-        width: 94%;
     }
 }
 
