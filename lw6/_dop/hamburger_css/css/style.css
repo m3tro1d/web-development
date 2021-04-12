@@ -177,7 +177,7 @@
 
 .navigation__menu-toggle
 {
-    width: 100%;
+    width: calc(100% - 25px);
     display: block;
     position: relative;
     top: 40px;
@@ -250,9 +250,7 @@
     position: absolute;
     width: 300px;
     margin: -100px 0 0 -50px;
-    padding-left: 20px;
-    padding-top: 125px;
-    padding-bottom: 25px;
+    padding: 125px 0 25px 20px;
 
     background: #ffffff;
     list-style-type: none;
@@ -442,6 +440,7 @@
 {
     display: block;
     margin: 0 auto;
+    max-width: 100%;
 }
 
 .movie-container__description
@@ -568,7 +567,7 @@
 .contact-form__message
 {
     resize: none;
-    width: 85%;
+    width: calc(100% - 44px);
     height: 225px;
 }
 
@@ -668,12 +667,6 @@
     {
         width: 40%;
         margin-left: 30%;
-    }
-
-
-    .contact-form__message
-    {
-        width: 94%;
     }
 }
 
