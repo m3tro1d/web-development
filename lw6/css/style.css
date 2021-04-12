@@ -79,12 +79,7 @@
     color: #F5F5F5;
 }
 
-.fancy-button:hover
-{
-    background-color: #098D72;
-    cursor: pointer;
-}
-
+.fancy-button:hover,
 .fancy-button:active
 {
     background-color: #098D72;
@@ -594,6 +589,7 @@
     .top__quote
     {
         margin-bottom: 120px;
+        width: 55%;
     }
 
     .page-about
