@@ -1,0 +1,26 @@
+.page-feedbacks
+{
+    margin: 75px;
+}
+
+.feedbacks-result__error-msg,
+.feedbacks-result__info
+{
+    margin: 75px;
+}
+
+.feedbacks-result__error-msg,
+.feedbacks-result__info
+{
+    font: 20px/32px 'Open Sans', sans-serif;
+}
+
+.feedbacks-result__error-msg
+{
+    color: #FF4040;
+}
+
+.rest__link
+{
+    margin-left: 75px;
+}
