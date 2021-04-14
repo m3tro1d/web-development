@@ -79,12 +79,7 @@
     color: #F5F5F5;
 }
 
-.fancy-button:hover
-{
-    background-color: #098D72;
-    cursor: pointer;
-}
-
+.fancy-button:hover,
 .fancy-button:active
 {
     background-color: #098D72;
@@ -177,7 +172,7 @@
 
 .navigation__menu-toggle
 {
-    width: 100%;
+    width: calc(100% - 25px);
     display: block;
     position: relative;
     top: 40px;
@@ -212,18 +207,18 @@
     border-radius: 3px;
     z-index: 1;
 
-    transform-origin: 4px;
+    transform-origin: 4px 0px;
     transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
                 background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
                 opacity 0.55s ease;
 }
 
-.navigation__line:first-of-type
+.navigation__line:first-child
 {
     transform-origin: 0% 0%;
 }
 
-.navigation__line::nth-of-type(2)
+.navigation__line:nth-last-child(2)
 {
     transform-origin: 0% 100%;
 }
@@ -234,13 +229,13 @@
     transform: rotate(45deg) translate(-2px, -1px);
 }
 
-.navigation__checkbox:checked ~ .navigation__line:nth-of-type(2)
+.navigation__checkbox:checked ~ .navigation__line:nth-last-child(3)
 {
     opacity: 0;
     transform: rotate(0deg) scale(0.2, 0.2);
 }
 
-.navigation__checkbox:checked ~ .navigation__line:last-of-type
+.navigation__checkbox:checked ~ .navigation__line:nth-last-child(2)
 {
     transform: rotate(-45deg) translate(0, -1px);
 }
@@ -250,9 +245,7 @@
     position: absolute;
     width: 300px;
     margin: -100px 0 0 -50px;
-    padding: 25px;
-    padding-left: 20px;
-    padding-top: 125px;
+    padding: 125px 0 25px 20px;
 
     background: #ffffff;
     list-style-type: none;
@@ -442,6 +435,7 @@
 {
     display: block;
     margin: 0 auto;
+    max-width: 100%;
 }
 
 .movie-container__description
@@ -689,12 +683,6 @@
         width: 40%;
         margin-left: 30%;
     }
-
-
-    .contact-form__message
-    {
-        width: 94%;
-    }
 }
 
 @media screen and (min-width: 1024px)
@@ -719,6 +707,7 @@
     .top__quote
     {
         margin-bottom: 120px;
+        width: 55%;
     }
 
     .page-about
@@ -821,7 +810,6 @@
 
     .page-about__main
     {
-        flex-shrink: 50;
         margin-top: -10%;
         margin-bottom: 0;
         width: 59.8%;
