@@ -692,7 +692,6 @@
 
     .page-about__main
     {
-        flex-shrink: 50;
         margin-top: -10%;
         margin-bottom: 0;
         width: 59.8%;
