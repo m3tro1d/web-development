@@ -91,7 +91,7 @@
 .page-header
 {
     height: 400px;
-    background: url('../images/header_bg.png') 30% 100px no-repeat;
+    background: url('/images/header_bg.png') 30% 100px no-repeat;
 }
 
 .page-header_dimmed
@@ -378,7 +378,7 @@
 
 .markered-list__item
 {
-    background: url('../images/marker.png') 0 50% no-repeat;
+    background: url('/images/marker.png') 0 50% no-repeat;
     margin-left: 4px;
     padding-left: 17px;
 }
@@ -541,7 +541,7 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background: url('../images/arrow_down.png') calc(97% - 1px) 52% no-repeat;
+    background: url('/images/arrow_down.png') calc(97% - 1px) 52% no-repeat;
 }
 
 .contact-form__gender
@@ -619,7 +619,7 @@
     .page-header
     {
         height: 315px;
-        background: url('../images/header_bg.png') 30% 65px no-repeat;
+        background: url('/images/header_bg.png') 30% 65px no-repeat;
     }
 
     .page-header_dimmed::after
@@ -690,7 +690,7 @@
     .page-header
     {
         height: 350px;
-        background: url('../images/header_bg.png') 0 50px no-repeat;
+        background: url('/images/header_bg.png') 0 50px no-repeat;
     }
 
     .page-header_dimmed::after
