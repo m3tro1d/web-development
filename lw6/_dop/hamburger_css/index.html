@@ -156,13 +156,13 @@
         <hr class="page-contact__line" />
       </div>
 
-      <form class="page-contact__contact-form" action="#" method="POST">
+      <form class="page-contact__contact-form" method="POST">
         <div class="contact-form__main-info">
           <label for="name" class="contact-form__label contact-form__label_required">Ваше имя</label>
-          <input id="name" class="contact-form__item contact-form__text" type="text" name="name" required />
+          <input id="name" class="contact-form__item contact-form__text" type="text" name="name" required="required" />
 
           <label for="email" class="contact-form__label contact-form__label_required">Ваш email</label>
-          <input id="email" class="contact-form__item contact-form__text" type="email" name="email" required />
+          <input id="email" class="contact-form__item contact-form__text" type="email" name="email" required="required" />
         </div>
 
         <label for="country" class="contact-form__label">Откуда вы?</label>
@@ -183,7 +183,7 @@
         </div>
 
         <label for="message" class="contact-form__label contact-form__label_required">Ваше сообщение</label>
-        <textarea id="message" name="message" class="contact-form__item contact-form__message" required></textarea>
+        <textarea id="message" name="message" class="contact-form__item contact-form__message" required="required"></textarea>
 
         <input type="submit" value="Отправить" class="fancy-button contact-form__submit" />
       </form>
