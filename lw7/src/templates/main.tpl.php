@@ -159,37 +159,52 @@
       <form class="page-contact__contact-form" method="POST">
         <div class="contact-form__main-info">
           <label for="name" class="contact-form__label contact-form__label_required">Ваше имя</label>
-          <input id="name" class="contact-form__item contact-form__text" type="text" name="name" required="required" />
+          <input id="name" class="contact-form__item contact-form__text" type="text" name="name" required="required" value="<?php echo $args['name'] ?? '' ?>" />
+          <div class="page-contact__msg page-contact__msg_error">
+            <?php echo $args['name-msg'] ?? '' ?>
+          </div>
 
           <label for="email" class="contact-form__label contact-form__label_required">Ваш email</label>
-          <input id="email" class="contact-form__item contact-form__text" type="email" name="email" required="required" />
+          <input id="email" class="contact-form__item contact-form__text" type="email" name="email" required="required" value="<?php echo $args['email'] ?? '' ?>" />
+          <div class="page-contact__msg page-contact__msg_error">
+            <?php echo $args['email-msg'] ?? '' ?>
+          </div>
         </div>
 
         <label for="country" class="contact-form__label">Откуда вы?</label>
         <select id="country" name="country" class="contact-form__item contact-form__country">
           <option value="RUS">Россия</option>
-          <option value="USA">США</option>
-          <option value="GER">Германия</option>
-          <option value="ITA">Италия</option>
-          <option value="GSK">Генсокё</option>
+          <option value="USA" <?php echo isset($args['country']) && $args['country'] === 'USA' ? 'selected' : '' ?>>США</option>
+          <option value="GER" <?php echo isset($args['country']) && $args['country'] === 'GER' ? 'selected' : '' ?>>Германия</option>
+          <option value="ITA" <?php echo isset($args['country']) && $args['country'] === 'ITA' ? 'selected' : '' ?>>Италия</option>
+          <option value="GSK" <?php echo isset($args['country']) && $args['country'] === 'GSK' ? 'selected' : '' ?>>Генсокё</option>
         </select>
+        <div class="page-contact__msg page-contact__msg_error">
+          <?php echo $args['country-msg'] ?? '' ?>
+        </div>
 
         <div class="contact-form__label contact-form__gender-heading">Ваш пол</div>
         <div class="contact-form__gender">
-          <input id="male" type="radio" name="gender" value="male" checked />
+          <input id="male" type="radio" name="gender" value="male" <?php echo isset($args['gender']) && $args['gender'] === 'male' || !isset($args['gender']) ? 'checked' : '' ?> />
           <label for="male" class="contact-form__label contact-form__gender-label">Мужской</label>
-          <input id="female" type="radio" name="gender" value="female" />
+          <input id="female" type="radio" name="gender" value="female" <?php echo isset($args['gender']) && $args['gender'] === 'female' ? 'checked' : '' ?> />
           <label for="female" class="contact-form__label contact-form__gender-label">Женский</label>
+        </div>
+        <div class="page-contact__msg page-contact__msg_error">
+          <?php echo $args['gender-msg'] ?? '' ?>
         </div>
 
         <label for="message" class="contact-form__label contact-form__label_required">Ваше сообщение</label>
-        <textarea id="message" name="message" class="contact-form__item contact-form__message" required="required"></textarea>
+        <textarea id="message" name="message" class="contact-form__item contact-form__message" required="required"><?php echo $args['message'] ?? '' ?></textarea>
+        <div class="page-contact__msg page-contact__msg_error">
+          <?php echo $args['message-msg'] ?? '' ?>
+        </div>
 
         <input type="submit" value="Отправить" class="fancy-button contact-form__submit" />
+        <div class="page-contact__msg">
+          <?php echo $args['msg'] ?? ''; ?>
+        </div>
       </form>
-      <div class="page-contact__msg<?php echo isset($args['error']) && $args['error'] ? ' page-contact__msg_error' : '' ?>">
-        <?php echo isset($args['msg']) ? $args['msg'] : ''; ?>
-      </div>
     <a class="link rest__link feedback__link" href="/feedbacks.php">Просмотр отзывов</a>
     </div>
 

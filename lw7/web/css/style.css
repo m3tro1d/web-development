@@ -578,10 +578,8 @@
 
 .page-contact__msg
 {
-    width: 28.4%;
-    margin-left: 36.25%;
-    margin-top: 25px;
-    font: 18px/32px 'Open Sans', sans-serif;
+    margin-top: 15px;
+    font: 16px/32px 'Open Sans', sans-serif;
 }
 
 .page-contact__msg_error

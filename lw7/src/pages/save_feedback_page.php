@@ -5,13 +5,18 @@ function saveFeedbackPage(): void
     ensureDir($saveDir);
 
     $data = formFeedbackArray();
-    echo var_dump($data);
-    $args = checkFeedbackArray($data);
-    if (!$args['error'])
+    $args = checkDataAndGetArgs($data);
+    if (!isset($args['error']) || !$args['error'])
     {
         saveFeedbackFile($saveDir, $data);
+        renderTemplate('main.tpl.php', [
+            'msg' => 'Успешно сохранено'
+        ]);
     }
-    renderTemplate('main.tpl.php', $args);
+    else
+    {
+        renderTemplate('main.tpl.php', $args);
+    }
 }
 
 
@@ -26,73 +31,78 @@ function ensureDir(string $dirName): void
 function formFeedbackArray(): array
 {
     return [
-        'name' => checkName(getPOSTParameter('name')),
-        'email' => checkEmail(getPOSTParameter('email')),
-        'country' => checkCountry(getPOSTParameter('country')),
-        'gender' => checkGender(getPOSTParameter('gender')),
-        'message' => checkMessage(getPOSTParameter('message'))
+        'name' => getPOSTParameter('name'),
+        'email' => getPOSTParameter('email'),
+        'country' => getPOSTParameter('country'),
+        'gender' => getPOSTParameter('gender'),
+        'message' => getPOSTParameter('message')
     ];
 }
-
-function checkName(string $name): string
+function checkDataAndGetArgs(array $data): array
 {
-    if (isset($name) && !empty($name) && preg_match('/[a-zA-ZА-Яа-я]+/', $name))
-    {
-        return $name;
-    }
-    return '';
-}
-
-function checkEmail(string $email): string
-{
-    if (isset($email) && !empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL))
-    {
-        return $email;
-    }
-    return '';
-}
-
-function checkCountry(string $country): string
-{
-    if (isset($country) && !empty($country))
-    {
-        return $country;
-    }
-    return '';
-}
-
-function checkGender(string $gender): string
-{
-    return checkCountry($gender);
-}
-
-function checkMessage(string $message): string
-{
-    return checkCountry($message);
-}
-
-function checkFeedbackArray(array $data): array
-{
-    if (empty($data['name']))
+    if (!isValidName($data['name']))
     {
         $data['error'] = true;
-        $data['msg'] = 'Некорректное имя';
+        $data['name-msg'] = 'Некорректное имя';
     }
-    else if (empty($data['email']))
+    if (!isValidEmail($data['email']))
     {
         $data['error'] = true;
-        $data['msg'] = 'Некорректный email';
+        $data['email-msg'] = 'Некорректный email';
     }
-    else if (empty($data['message']))
+    if (!isValidMessage($data['message']))
     {
         $data['error'] = true;
-        $data['msg'] = 'Некорректное сообщение';
+        $data['message-msg'] = 'Некорректное сообщение';
     }
-    else
+    if (!isValidCountry($data['country']))
     {
-        $data['msg'] = 'Успешно сохранено';
+        $data['error'] = true;
+        $data['country-msg'] = 'Некорректная страна';
     }
+    if (!isValidGender($data['gender']))
+    {
+        $data['error'] = true;
+        $data['gender-msg'] = 'Некорректный пол';
+    }
+
     return $data;
+}
+
+function isValidName(?string $name): bool
+{
+    return (!empty($name) && preg_match('/^[a-zA-ZА-Яа-я]+$/', $name));
+}
+
+function isValidEmail(?string $email): bool
+{
+    return (!empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL));
+}
+
+function isValidMessage(?string $message): bool
+{
+    return !empty($message);
+}
+
+function isValidCountry(?string $country): bool
+{
+    $countries = [
+        'RUS',
+        'USA',
+        'GER',
+        'ITA',
+        'GSK'
+    ];
+    return (!empty($country) && in_array($country, $countries));
+}
+
+function isValidGender(?string $gender): bool
+{
+    $genders =[
+        'male',
+        'female'
+    ];
+    return (!empty($gender) && in_array($gender, $genders));
 }
 
 function saveFeedbackFile(string $saveDir, array $data): void
