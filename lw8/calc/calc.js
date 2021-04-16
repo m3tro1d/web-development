@@ -1,4 +1,10 @@
 function calc(expr) {
+  // First check
+  if (typeof expr !== 'string') {
+    console.error(`Argument error: ${expr} is not a string`);
+    return NaN;
+  }
+
   let stack = [];
   let isFine = true;
 
@@ -134,3 +140,6 @@ console.assert(isNaN(calc('* 12 + 123hello12 7')), "isNaN(calc('* 12 + 123hello1
 // Invalid parentheses
 console.assert(isNaN(calc('+ 2 (- 3) 2)')), `isNaN(calc('+ 2 (- 3) 2)')) failed`);
 console.assert(isNaN(calc('+ 2 (- 3( 2)')), `isNaN(calc('+ 2 (- 3( 2)')) failed`);
+
+// Invalid type
+console.assert(isNaN(calc(1337)), `isNaN(calc(1337)) failed`);
