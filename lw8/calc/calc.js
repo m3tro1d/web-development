@@ -133,9 +133,12 @@ console.assert(calc('* - 5 6 7') === -7, `calc('* - 5 6 7') === -7 failed`);
 // Parentheses
 console.assert(calc('* (+ 2 (* 4 6)) (+ 3 5)') === 208, `calc('* (+ 2 (* 4 6)) (+ 3 5)') === 208 failed`);
 
+// Too few arguments
+console.assert(isNaN(calc('* 2 + 2')), `isNaN(calc('* 2 + 2')) failed`);
+
 // Invalid symbols
-console.assert(isNaN(calc('+ 2 d')), "isNaN(calc('+ 2 d')) failed");
-console.assert(isNaN(calc('* 12 + 123hello12 7')), "isNaN(calc('* 12 + 123hello12 7')) failed");
+console.assert(isNaN(calc('+ 2 d')), `isNaN(calc('+ 2 d')) failed`);
+console.assert(isNaN(calc('* 12 + 123hello12 7')), `isNaN(calc('* 12 + 123hello12 7')) failed`);
 
 // Invalid parentheses
 console.assert(isNaN(calc('+ 2 (- 3) 2)')), `isNaN(calc('+ 2 (- 3) 2)')) failed`);
