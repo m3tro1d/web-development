@@ -26,7 +26,7 @@ function calc(expr) {
 
     } else if (expr[i] == ')') {
       // Recursively calculate the parenthesized expression
-      let parenStart = i;
+      const parenStart = i;
       try {
         i = getParenthesizedExprEnd(expr, i);
       } catch (e) {
@@ -79,7 +79,7 @@ function calc(expr) {
   }
 
   function isOperation(c) {
-    let operations = [
+    const operations = [
       '+',
       '-',
       '*',
@@ -92,7 +92,7 @@ function calc(expr) {
     let numberStr = '';
     let i;
     for (i = start; i >= 0; i--) {
-      if (isDigit(expr[i])) numberStr = expr[i] + numberStr;
+      if (isDigit(expr[i]) || expr[i] === '.') numberStr = expr[i] + numberStr;
       else if (isOperation(expr[i]) || expr[i] === ' ') break;
       else throw new Error(`Parsing error: unexpected token '${expr[i]}' at ${i}`);
     }
@@ -100,7 +100,9 @@ function calc(expr) {
       numberStr = '-' + numberStr;
       i--;
     }
-    return [Number(numberStr), i];
+    let number = Number(numberStr);
+    if (!isNaN(number)) return [Number(numberStr), i];
+    throw new Error('Parsing error: invalid number occured');
   }
 
   function getParenthesizedExprEnd(expr, start) {
@@ -121,28 +123,45 @@ function calc(expr) {
  * Tests
  */
 // Soft stuff
-console.assert(calc('+ 3 4') === 7, `calc('+ 3 4') === 7 failed`);
-console.assert(calc('+ 2 * 2 2') === 6, `calc('+ 2 * 2 2') === 6 failed`);
-console.assert(calc('* 2 + 2 2') === 8, `calc('* 2 + 2 2') === 8 failed`);
-console.assert(calc('+ 2 / 8 * 2 2') === 4, `calc('+ 2 / 8 * 2 2') === 4 failed`);
+assertEquals(calc('+ 3 4'), 7);
+assertEquals(calc('+ 2 * 2 2'), 6);
+assertEquals(calc('* 2 + 2 2'), 8);
+assertEquals(calc('+ 2 / 8 * 2 2'), 4);
 
-// Big and negative numbers
-console.assert(calc('* 12 3') === 36, `calc('* 12 3') === 36 failed`);
-console.assert(calc('* - 5 6 7') === -7, `calc('* - 5 6 7') === -7 failed`);
+// More-than-one-digit numbers
+assertEquals(calc('* 1234 56'), 69104);
+
+// Floating point numbers
+assertEquals(calc('+ 12.1 7.9'), 20);
+
+// Negative numbers
+assertEquals(calc('+ -12 3'), -9);
 
 // Parentheses
-console.assert(calc('* (+ 2 (* 4 6)) (+ 3 5)') === 208, `calc('* (+ 2 (* 4 6)) (+ 3 5)') === 208 failed`);
+assertEquals(calc('* (- 5 6) 7'), -7);
+assertEquals(calc('* (+ 2 (* 4 (* 3 2))) (+ 3 5)'), 208);
 
 // Too few arguments
-console.assert(isNaN(calc('* 2 + 2')), `isNaN(calc('* 2 + 2')) failed`);
+assertNaN(calc('* 2 + 2'));
 
 // Invalid symbols
-console.assert(isNaN(calc('+ 2 d')), `isNaN(calc('+ 2 d')) failed`);
-console.assert(isNaN(calc('* 12 + 123hello12 7')), `isNaN(calc('* 12 + 123hello12 7')) failed`);
+assertNaN(calc('+ 2 d'));
+assertNaN(calc('* 12 + 123hello12 7'));
+assertNaN(calc('+ 12. 3'))
+assertNaN(calc('+ 1..2 3'))
+assertNaN(calc('+ 1.2.3 3'))
 
 // Invalid parentheses
-console.assert(isNaN(calc('+ 2 (- 3) 2)')), `isNaN(calc('+ 2 (- 3) 2)')) failed`);
-console.assert(isNaN(calc('+ 2 (- 3( 2)')), `isNaN(calc('+ 2 (- 3( 2)')) failed`);
+assertNaN(calc('+ 2 (- 3) 2)'));
+assertNaN(calc('+ 2 (- 3( 2)'));
 
 // Invalid type
-console.assert(isNaN(calc(1337)), `isNaN(calc(1337)) failed`);
+assertNaN(calc(1337));
+
+function assertEquals(actual, expected) {
+  if (actual !== expected) throw new Error(`expected: ${expected} but was: ${actual}`);
+}
+
+function assertNaN(value) {
+  if (!isNaN(value)) throw new Error(`expected: NaN but was: ${actual}`);
+}

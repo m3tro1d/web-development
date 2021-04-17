@@ -46,3 +46,5 @@ console.log('========== INVALID ==========');
 isPrimeNumber('hello');
 testArray = [1, 2, 'I\'m an error!', 13];
 isPrimeNumber(testArray);
+isPrimeNumber(13.37);
+isPrimeNumber(-322);
