@@ -1,5 +1,4 @@
 function calc(expr) {
-  // First check
   if (typeof expr !== 'string') {
     console.error(`Argument error: ${expr} is not a string`);
     return NaN;

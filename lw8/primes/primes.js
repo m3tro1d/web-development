@@ -18,7 +18,7 @@ function isPrimeNumber(n) {
         break;
       }
     }
-    // Sanity checks
+    // Sanity checks (natural numbers more than 1)
     if (x <= 1 || Math.floor(x) !== x) {
       isPrime = false;
     }
@@ -35,16 +35,14 @@ function isPrimeNumber(n) {
 console.log('========== NUMBERS ==========');
 isPrimeNumber(12);
 isPrimeNumber(13);
+isPrimeNumber(13.37);
+isPrimeNumber(-322);
 
 // Array test
 console.log('========== ARRAY ==========');
-let testArray = [...Array(100).keys()].map(i => ++i);
-isPrimeNumber(testArray);
+isPrimeNumber([-1, 1.3, 2, 3, 4, 5, 16]);
 
 // Invalid argument type test
 console.log('========== INVALID ==========');
 isPrimeNumber('hello');
-testArray = [1, 2, 'I\'m an error!', 13];
-isPrimeNumber(testArray);
-isPrimeNumber(13.37);
-isPrimeNumber(-322);
+isPrimeNumber([1, 2, 'I\'m an error!', 13, 14]);
