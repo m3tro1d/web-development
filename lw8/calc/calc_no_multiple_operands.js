@@ -37,32 +37,27 @@ function calc(expr) {
 
     } else if (isOperation(expr[i])) {
       // Perform operations
-      if (stack.length < 2) {
+      let operand1, operand2;
+      if (stack.length >= 2) {
+        operand1 = stack.pop();
+        operand2 = stack.pop();
+      } else {
         console.error(`Parsing error: too few arguments for '${expr[i]}' at ${i}`);
         isFine = false;
         break;
       }
-      let res, op1, op2;
       switch (expr[i]) {
         case '+':
-          // Sum all the previous values
-          res = stack.reduce((acc, value) => acc + value, 0);
-          stack = [res];
+          stack.push(operand1 + operand2);
           break;
         case '-':
-          op1 = stack.pop();
-          op2 = stack.pop();
-          stack.push(op1 - op2);
+          stack.push(operand1 - operand2);
           break;
         case '*':
-          // Multiply all the previous values
-          res = stack.reduce((acc, value) => acc * value, 1);
-          stack = [res];
+          stack.push(operand1 * operand2);
           break;
         case '/':
-          op1 = stack.pop();
-          op2 = stack.pop();
-          stack.push(op1 / op2);
+          stack.push(operand1 / operand2);
           break;
       }
     } else {
@@ -135,9 +130,6 @@ assertEquals(calc('+ 2 / 8 * 2 2'), 4);
 // More-than-one-digit numbers
 assertEquals(calc('* 1234 56'), 69104);
 
-// Multiple operands
-assertEquals(calc('- (+ 2 2 2 2) 1'), 7);
-
 // Floating point numbers
 assertEquals(calc('+ 12.1 7.9'), 20);
 
@@ -146,7 +138,7 @@ assertEquals(calc('+ -12 3'), -9);
 
 // Parentheses
 assertEquals(calc('* (- 5 6) 7'), -7);
-assertEquals(calc('(+ (* 3 (+ (* 2 4) (+ 3 5))) (+ (- 10 7) 6))'), 57);
+assertEquals(calc('* (+ 2 (* 4 (* 3 2))) (+ 3 5)'), 208);
 
 // Too few arguments
 assertNaN(calc('* 2 + 2'));
@@ -165,10 +157,6 @@ assertNaN(calc('+ 2 (- 3( 2)'));
 // Invalid type
 assertNaN(calc(1337));
 
-
-/**
- * Testing utils
- */
 function assertEquals(actual, expected) {
   if (actual !== expected) throw new Error(`expected: ${expected} but was: ${actual}`);
 }
