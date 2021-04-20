@@ -20,7 +20,7 @@ function calc(expr) {
         isFine = false;
         break;
       }
-      i = numberEnd;
+      i = numberEnd + 1; // Suppress the i-- in the for loop
       stack.push(number);
 
     } else if (expr[i] == ')') {
@@ -83,30 +83,23 @@ function calc(expr) {
   }
 
   function isOperation(c) {
-    const operations = [
-      '+',
-      '-',
-      '*',
-      '/',
-    ];
-    return operations.includes(c);
+    return ['+', '-', '*', '/'].includes(c);
   }
 
   function getNumber(expr, start) {
     let numberStr = '';
     let i;
-    for (i = start; i >= 0; i--) {
-      if (isDigit(expr[i]) || expr[i] === '.') numberStr = expr[i] + numberStr;
-      else if (isOperation(expr[i]) || expr[i] === ' ') break;
-      else throw new Error(`Parsing error: unexpected token '${expr[i]}' at ${i}`);
+    for (i = start; i >= 0 && (isDigit(expr[i]) || expr[i] === '.'); i--) {
+      numberStr = expr[i] + numberStr;
     }
     if (expr[i] === '-') {
       numberStr = '-' + numberStr;
       i--;
     }
     let number = Number(numberStr);
-    if (!isNaN(number)) return [Number(numberStr), i];
-    throw new Error('Parsing error: invalid number occured');
+    if (isNaN(number))
+      throw new Error('Parsing error: invalid number occured');
+    return [Number(numberStr), i];
   }
 
   function getParenthesizedExprEnd(expr, start) {
@@ -147,6 +140,9 @@ assertEquals(calc('+ -12 3'), -9);
 // Parentheses
 assertEquals(calc('* (- 5 6) 7'), -7);
 assertEquals(calc('(+ (* 3 (+ (* 2 4) (+ 3 5))) (+ (- 10 7) 6))'), 57);
+
+// Tight whitespaces
+assertEquals(calc('+(*2 2)2 4'), 10);
 
 // Too few arguments
 assertNaN(calc('* 2 + 2'));
