@@ -174,5 +174,5 @@ function assertEquals(actual, expected) {
 }
 
 function assertNaN(value) {
-  if (!isNaN(value)) throw new Error(`expected: NaN but was: ${actual}`);
+  if (!isNaN(value)) throw new Error(`expected: NaN but was: ${value}`);
 }
