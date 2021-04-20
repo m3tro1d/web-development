@@ -7,21 +7,21 @@ function isPrimeNumber(n) {
       else console.error(`'${element}' is not a number`);
     });
   } else {
-    console.error(`'${n}' is not a number neither an array`);
+    console.error(`'${n}' is not a number, neither an array`);
   }
 
   function isSinglePrime(x) {
     let isPrime = true;
-    for (let i = 2; i * i < x; i++) {
-      if (x % i === 0) {
-        isPrime = false;
-        break;
-      }
-    }
+
     // Sanity checks (natural numbers more than 1)
-    if (x <= 1 || Math.floor(x) !== x) {
+    if (!Number.isInteger(x) || x <= 1) {
       isPrime = false;
     }
+
+    for (let i = 2; i * i <= x && isPrime; i++) {
+      if (x % i === 0) isPrime = false;
+    }
+
     if (isPrime) {
       console.log(x + ' is a prime number');
     } else {
