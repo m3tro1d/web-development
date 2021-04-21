@@ -141,8 +141,9 @@ assertEquals(calc('+ -12 3'), -9);
 assertEquals(calc('* (- 5 6) 7'), -7);
 assertEquals(calc('(+ (* 3 (+ (* 2 4) (+ 3 5))) (+ (- 10 7) 6))'), 57);
 
-// Tight whitespaces
+// Random whitespaces amount
 assertEquals(calc('+(*2 2)2 4'), 10);
+assertEquals(calc('/   ( * 12   3   )  6  '), 6);
 
 // Too few arguments
 assertNaN(calc('* 2 + 2'));
