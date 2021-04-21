@@ -3,6 +3,10 @@ function calc(expr) {
     console.error(`Argument error: ${expr} is not a string`);
     return NaN;
   }
+  if (expr.length === 0) {
+    console.error('Argument error: empty expression');
+    return NaN;
+  }
 
   let stack = [];
   let isFine = true;
