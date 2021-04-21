@@ -5,8 +5,8 @@ function saveFeedbackPage(): void
     ensureDir($saveDir);
 
     $data = formFeedbackArray();
-    $args = checkDataAndGetArgs($data);
-    if (!isset($args['error']) || !$args['error'])
+    validateData($data);
+    if (thereAreNoErrors($data))
     {
         saveFeedbackFile($saveDir, $data);
         renderTemplate('main.tpl.php', [
@@ -15,7 +15,7 @@ function saveFeedbackPage(): void
     }
     else
     {
-        renderTemplate('main.tpl.php', $args);
+        renderTemplate('main.tpl.php', $data);
     }
 }
 
@@ -35,38 +35,41 @@ function formFeedbackArray(): array
         'email' => getPOSTParameter('email'),
         'country' => getPOSTParameter('country'),
         'gender' => getPOSTParameter('gender'),
-        'message' => getPOSTParameter('message')
+        'message' => getPOSTParameter('message'),
     ];
 }
-function checkDataAndGetArgs(array $data): array
+
+function validateData(array &$data): void
 {
     if (!isValidName($data['name']))
     {
-        $data['error'] = true;
         $data['name-msg'] = 'Некорректное имя';
     }
     if (!isValidEmail($data['email']))
     {
-        $data['error'] = true;
         $data['email-msg'] = 'Некорректный email';
     }
     if (!isValidMessage($data['message']))
     {
-        $data['error'] = true;
         $data['message-msg'] = 'Некорректное сообщение';
     }
     if (!isValidCountry($data['country']))
     {
-        $data['error'] = true;
         $data['country-msg'] = 'Некорректная страна';
     }
     if (!isValidGender($data['gender']))
     {
-        $data['error'] = true;
         $data['gender-msg'] = 'Некорректный пол';
     }
+}
 
-    return $data;
+function thereAreNoErrors(array &$data): bool
+{
+    return !(isset($data['name-msg']) ||
+        isset($data['email-msg']) ||
+        isset($data['message-msg']) ||
+        isset($data['country-msg']) ||
+        isset($data['gender-msg']));
 }
 
 function isValidName(?string $name): bool
@@ -91,7 +94,7 @@ function isValidCountry(?string $country): bool
         'USA',
         'GER',
         'ITA',
-        'GSK'
+        'GSK',
     ];
     return (!empty($country) && in_array($country, $countries));
 }
@@ -100,12 +103,12 @@ function isValidGender(?string $gender): bool
 {
     $genders =[
         'male',
-        'female'
+        'female',
     ];
     return (!empty($gender) && in_array($gender, $genders));
 }
 
-function saveFeedbackFile(string $saveDir, array $data): void
+function saveFeedbackFile(string $saveDir, array &$data): void
 {
     $savePath = "$saveDir/" . strtolower($data['email']) . '.txt';
     file_put_contents($savePath, serialize($data));

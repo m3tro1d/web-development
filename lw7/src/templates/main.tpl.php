@@ -202,7 +202,7 @@
 
         <input type="submit" value="Отправить" class="fancy-button contact-form__submit" />
         <div class="page-contact__msg">
-          <?php echo $args['msg'] ?? ''; ?>
+          <?php echo $args['msg'] ?? '' ?>
         </div>
       </form>
     <a class="link rest__link feedback__link" href="/feedbacks.php">Просмотр отзывов</a>
