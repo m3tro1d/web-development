@@ -92,13 +92,13 @@ function calc(expr) {
     for (i = start; i >= 0 && (isDigit(expr[i]) || expr[i] === '.'); i--) {
       numberStr = expr[i] + numberStr;
     }
+    // Handle the optional minus for negative numbers
     if (expr[i] === '-') {
       numberStr = '-' + numberStr;
       i--;
     }
     let number = Number(numberStr);
-    if (isNaN(number))
-      throw new Error('Parsing error: invalid number occured');
+    if (isNaN(number)) throw new Error('Parsing error: invalid number occured');
     return [Number(numberStr), i];
   }
 
