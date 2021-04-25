@@ -1,4 +1,4 @@
-function run() {
+window.onload = function() {
   const nextButton = document.getElementById('movie-carousel__next-btn');
   const prevButton = document.getElementById('movie-carousel__prev-btn');
   const movies = document.querySelectorAll('.movie-container__movie');
@@ -29,5 +29,3 @@ function run() {
   nextButton.addEventListener('click', nextMovie);
   prevButton.addEventListener('click', prevMovie);
 }
-
-window.onload = run;

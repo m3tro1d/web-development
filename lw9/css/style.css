@@ -336,7 +336,12 @@
 
 .btn__arrow-left
 {
-    margin-left: 7px;
+    margin-left: 11px;
+}
+
+.btn__arrow-right
+{
+    margin-left: 3px;
 }
 
 .movie-carousel__btn:hover
@@ -346,7 +351,7 @@
 
 .movie-carousel__container
 {
-    display: inline-flex;
+    display: flex;
     overflow: hidden;
     width: 1200px;
 }
