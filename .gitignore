@@ -2,3 +2,6 @@
 *.exe
 *.cgi
 *.o
+
+# IDE config
+.idea/
