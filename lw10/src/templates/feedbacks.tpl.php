@@ -17,27 +17,6 @@
     <input id="email" name="email" class="contact-form__item contact-form__text" type="email" required="required" value="<?php echo $args['email'] ?? '' ?>" />
     <input class="fancy-button contact-form__submit" type="submit" value="Отправить" />
   </form>
-
-  <?php
-    if (isset($args['error']) && $args['error']):
-      echo '<div class="feedbacks-result__error-msg">';
-      echo $args['msg'];
-      echo '</div>';
-    else:
-      if (isset($args['email'])):
-        echo '<ul class="feedbacks-result__info">';
-        echo '<li>Name: <b>' . $args['name'] . '</b></li>';
-        echo '<li>Email: <b>' . $args['email'] . '</b></li>';
-        echo '<li>Country: <b>' . $args['country'] . '</b></li>';
-        echo '<li>Gender: <b>' . $args['gender'] . '</b></li>';
-        echo '';
-        echo '<li>Message:</li>';
-        echo '<b>' . str_replace(PHP_EOL, '<br />', $args['message']) . '</b></li>';
-        echo '</ul>';
-      endif;
-    endif;
-  ?>
-
   <a class="link rest__link" href="/">На главную</a>
 </body>
 </html>
