@@ -349,11 +349,15 @@
     background-color: #098d72;
 }
 
+.movie-carousel__viewport
+{
+    overflow: hidden;
+    width: 1200px;
+}
+
 .movie-carousel__container
 {
     display: flex;
-    overflow: hidden;
-    width: 1200px;
 }
 
 .movie-container__movie
