@@ -2,12 +2,13 @@
 function getFeedbackPage(): void
 {
     decodeJson();
-    if (!empty(getPOSTParameter('email')))
+    $email = getPOSTParameter('email');
+    if (!empty($email))
     {
-        $dataPath = realpath(__DIR__ . '/../../data/' . strtolower(getPOSTParameter('email')) . '.txt');
-        if ($dataPath)
+        $feedbackPath = getFeedbackPath($email);
+        if (!empty($feedbackPath))
         {
-            $feedbackContents = getFeedbackContents($dataPath);
+            $feedbackContents = getFeedbackContents($feedbackPath);
             header('HTTP/1.1 200 OK');
             echo json_encode($feedbackContents);
         }
@@ -28,6 +29,12 @@ function getFeedbackPage(): void
     }
 }
 
+
+function getFeedbackPath(string $email): string
+{
+    define("DATA_DIRECTORY", __DIR__ . '/../../data/');
+    return realpath(DATA_DIRECTORY . strtolower($email) . '.txt') ?? '';
+}
 
 function getFeedbackContents(string $path): array
 {

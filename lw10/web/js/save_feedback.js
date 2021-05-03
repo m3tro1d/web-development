@@ -1,3 +1,5 @@
+const form = document.getElementById('feedback-form');
+
 const formElements = {
   name: document.getElementById('name'),
   email: document.getElementById('email'),
@@ -14,7 +16,6 @@ function clearInvalidFields() {
 
 function highlightInvalidFields(errorObject) {
   clearInvalidFields();
-
   if (errorObject['name-error']) {
     formElements.name.classList.add('contact-form__error');
   }
@@ -37,20 +38,23 @@ function showSuccessMessage() {
 
   const doneIcon = document.createElement('span');
   doneIcon.className = 'material-icons contact-form__success-done';
-  doneIcon.appendChild(document.createTextNode('done'));
+  doneIcon.textContent = 'done';
 
   const message = document.createElement('div');
   message.className = 'contact-form__success-message';
-  message.appendChild(document.createTextNode('Ваше сообщение успешно отправлено'));
+  message.textContent = 'Ваше сообщение успешно отправлено';
 
   formBlock.appendChild(doneIcon);
   formBlock.appendChild(message);
+
+  setTimeout(() => {
+    formBlock.removeChild(doneIcon);
+    formBlock.removeChild(message);
+  }, 2000);
 }
 
-function run() {
-  const form = document.getElementById('feedback-form');
-
-  function sendFeedback(event) {
+window.onload =  function() {
+  async function sendFeedback(event) {
     event.preventDefault();
 
     const feedbackUri = '/';
@@ -69,24 +73,15 @@ function run() {
       body: JSON.stringify(body),
     };
 
-    fetch(feedbackUri, options)
-      .then(response => {
-        if (response.ok) {
-          // Show the actual message here
-          clearInvalidFields();
-          showSuccessMessage();
-        } else {
-          return response.json();
-        }
-      })
-      .then(json => {
-        if (json) {
-          highlightInvalidFields(json);
-        }
-      });
+    const response = await fetch(feedbackUri, options);
+    if (response.ok) {
+      clearInvalidFields();
+      showSuccessMessage();
+    } else {
+      const json = await response.json();
+      highlightInvalidFields(json);
+    }
   }
 
   form.addEventListener('submit', sendFeedback);
 }
-
-window.onload = run;

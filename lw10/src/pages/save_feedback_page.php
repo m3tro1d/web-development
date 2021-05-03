@@ -1,8 +1,8 @@
 <?php
 function saveFeedbackPage(): void
 {
-    $saveDir = __DIR__ . '/../../data';
-    ensureDir($saveDir);
+    define("DATA_DIRECTORY", __DIR__ . '/../../data');
+    ensureDir(DATA_DIRECTORY);
 
     header('Content-Type: application/json');
     decodeJson();
@@ -11,8 +11,8 @@ function saveFeedbackPage(): void
     validateData($data);
     if (thereAreNoErrors($data))
     {
-        saveFeedbackFile($saveDir, $data);
         header('HTTP/1.1 201 Created');
+        saveFeedbackFile(DATA_DIRECTORY, $data);
     }
     else
     {

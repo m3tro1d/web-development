@@ -1,27 +1,22 @@
+const form = document.getElementById('feedback-form');
+const infoBlock = document.getElementById('feedback-result');
+
 function displayResult(feedback) {
-  const infoBlock = document.createElement('ul');
-  infoBlock.classList.add('feedbacks-result__info');
+  infoBlock.classList.remove('feedback-result_error');
   let feedbackString = '';
   for (const field in feedback) {
     feedbackString += `<li>${field}: <b>${feedback[field].replaceAll('\n', '<br />')}</b></li>`;
   }
   infoBlock.innerHTML = feedbackString;
-
-  document.body.insertBefore(infoBlock, document.querySelector('.rest__link'));
 }
 
 function displayError(message) {
-  const errorBlock = document.createElement('div');
-  errorBlock.classList.add('feedbacks-result__error-msg');
-  errorBlock.textContent = message;
-
-  document.body.insertBefore(errorBlock, document.querySelector('.rest__link'));
+  infoBlock.classList.add('feedback-result_error');
+  infoBlock.textContent = message;
 }
 
-function run() {
-  const form = document.getElementById('feedback-form');
-
-  function getFeedback(event) {
+window.onload = function() {
+  async function getFeedback(event) {
     event.preventDefault();
 
     const feedbackUri = '/feedbacks.php';
@@ -36,18 +31,14 @@ function run() {
       body: JSON.stringify(body),
     };
 
-    fetch(feedbackUri, options)
-      .then(response => response.json())
-      .then(json => {
-        if (json.msg) {
-          displayError(json.msg);
-        } else {
-          displayResult(json);
-        }
-      });
+    const response = await fetch(feedbackUri, options);
+    const json = await response.json();
+    if (response.ok) {
+      displayResult(json);
+    } else {
+      displayError(json.msg);
+    }
   }
 
   form.addEventListener('submit', getFeedback);
 }
-
-window.onload = run;

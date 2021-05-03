@@ -8,19 +8,13 @@
     margin-top: 50px;
 }
 
-.feedbacks-result__error-msg,
-.feedbacks-result__info
+.feedback-result
 {
     margin: 75px;
-}
-
-.feedbacks-result__error-msg,
-.feedbacks-result__info
-{
     font: 20px/32px 'Open Sans', sans-serif;
 }
 
-.feedbacks-result__error-msg
+.feedback-result_error
 {
     color: #FF4040;
 }

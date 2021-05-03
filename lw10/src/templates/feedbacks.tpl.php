@@ -17,6 +17,7 @@
     <input id="email" name="email" class="contact-form__item contact-form__text" type="email" required="required" value="<?php echo $args['email'] ?? '' ?>" />
     <input class="fancy-button contact-form__submit" type="submit" value="Отправить" />
   </form>
+  <div class="feedback-result" id="feedback-result"></div>
   <a class="link rest__link" href="/">На главную</a>
 </body>
 </html>
