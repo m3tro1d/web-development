@@ -1,35 +1,56 @@
-function setTransition(element, state) {
+const ANIMATION_MS = 800;
+
+const nextButton = document.getElementById('movie-carousel__next-btn');
+const prevButton = document.getElementById('movie-carousel__prev-btn');
+const movieContainer = document.querySelector('.movie-carousel__container');
+const movies = document.querySelectorAll('.movie-container__movie');
+
+function flushCSS() {
+  movieContainer.offsetWidth;
+}
+
+function setTransition(state) {
   if (state) {
-    element.style.transition = '1s ease-in-out';
+    movieContainer.style.transition = `${ANIMATION_MS/1000}s ease-in-out`;
   } else {
-    element.style.transition = 'none';
+    movieContainer.style.transition = 'none';
   }
+  flushCSS();
 }
 
-function translateX(element, offset) {
-  element.style.transform = `translateX(${offset}px)`;
+function translateX(offset) {
+  movieContainer.style.transform = `translateX(${offset}px)`;
+  flushCSS();
 }
 
-function flushCSS(element) {
-  element.offsetWidth;
+function moveToLeft() {
+  const translateLength = -(movies[0].offsetWidth + 20);
+  translateX(translateLength);
+}
+
+function moveToZero() {
+  translateX(0);
 }
 
 window.onload = function() {
-  const nextButton = document.getElementById('movie-carousel__next-btn');
-  const prevButton = document.getElementById('movie-carousel__prev-btn');
-  const movies = document.querySelectorAll('.movie-container__movie');
-  const movieContainer = document.querySelector('.movie-carousel__container');
-
   const lastMovieIndex = movies.length - 1;
   let currentMovieIndex = 0;
 
-  function nextMovie() {
-    // Animate the transition
-    setTransition(movieContainer, true);
-    const translateLength = -(movies[0].offsetWidth + 20);
-    translateX(movieContainer, translateLength);
+  function unlisten() {
     nextButton.removeEventListener('click', nextMovie);
     prevButton.removeEventListener('click', prevMovie);
+  }
+
+  function listen() {
+    nextButton.addEventListener('click', nextMovie);
+    prevButton.addEventListener('click', prevMovie);
+  }
+
+  function nextMovie() {
+    // Animate the transition
+    setTransition(true);
+    moveToLeft();
+    unlisten();
 
     setTimeout(() => {
       // Rearrange the elements
@@ -39,11 +60,10 @@ window.onload = function() {
       else currentMovieIndex = 0;
 
       // Remove the transition
-      setTransition(movieContainer, false);
-      translateX(movieContainer, 0);
-      nextButton.addEventListener('click', nextMovie);
-      prevButton.addEventListener('click', prevMovie);
-    }, 1000);
+      setTransition(false);
+      moveToZero();
+      listen();
+    }, ANIMATION_MS);
   }
 
   function prevMovie() {
@@ -59,24 +79,15 @@ window.onload = function() {
     }
 
     // Move for the animation later
-    setTransition(movieContainer, false);
-    const translateLength = -(movies[0].offsetWidth + 20);
-    translateX(movieContainer, translateLength);
+    setTransition(false);
+    moveToLeft();
 
     // Animate the transition
-    flushCSS(movieContainer);
-    setTransition(movieContainer, true);
-    translateX(movieContainer, 0);
-    nextButton.removeEventListener('click', nextMovie);
-    prevButton.removeEventListener('click', prevMovie);
-
-    setTimeout(() => {
-      setTransition(movieContainer, false);
-      nextButton.addEventListener('click', nextMovie);
-      prevButton.addEventListener('click', prevMovie);
-    }, 1000);
+    setTransition(true);
+    moveToZero();
+    unlisten();
+    setTimeout(listen, ANIMATION_MS);
   }
 
-  nextButton.addEventListener('click', nextMovie);
-  prevButton.addEventListener('click', prevMovie);
+  listen();
 }
