@@ -600,6 +600,11 @@
     margin-right: 10px;
 }
 
+.contact-form__success-failed
+{
+    color: #ee0707;
+}
+
 .contact-form__success-message
 {
     width: 30%;
