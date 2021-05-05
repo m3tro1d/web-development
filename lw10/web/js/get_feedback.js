@@ -45,7 +45,7 @@ async function fetchFeedback(url, options) {
     if (response.ok) {
       return json;
     } else {
-      throw new Error(json.msg);
+      throw new Error(json.message ?? 'Something went wrong');
     }
   }
 }

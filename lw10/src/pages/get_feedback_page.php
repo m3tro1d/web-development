@@ -1,7 +1,9 @@
 <?php
 function getFeedbackPage(): void
 {
+    header('Content-Type: application/json');
     decodeJson();
+
     $email = getPOSTParameter('email');
     if (!empty($email))
     {
@@ -16,7 +18,7 @@ function getFeedbackPage(): void
         {
             header('HTTP/1.1 404 Not Found');
             echo json_encode([
-                'msg' => 'Пользователя нет в базе'
+                'message' => 'Пользователя нет в базе'
             ]);
         }
     }
@@ -24,7 +26,7 @@ function getFeedbackPage(): void
     {
         header('HTTP/1.1 400 Bad Request');
         echo json_encode([
-            'msg' => 'Пустой email'
+            'message' => 'Пустой email'
         ]);
     }
 }
