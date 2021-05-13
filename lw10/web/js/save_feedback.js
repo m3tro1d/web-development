@@ -26,6 +26,7 @@ async function handleFeedbackSubmit(event) {
     await sendFeedback(requestUri, options);
     showSuccessMessage();
     clearInvalidFields();
+    clearFormFields();
   } catch (error) {
     showErrorMessage(error.message);
     if (error.isBadRequest) highlightInvalidFields(error.json);
@@ -114,6 +115,14 @@ function clearInvalidFields() {
   for (const elementName in formElements) {
     formElements[elementName].classList.remove('contact-form__error');
   }
+}
+
+function clearFormFields() {
+    form.name.value = '';
+    form.email.value = '';
+    form.country.value = 'RUS';
+    form.gender.value = 'male';
+    form.message.value = '';
 }
 
 function showErrorMessage(msg) {
