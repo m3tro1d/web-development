@@ -2,16 +2,16 @@
 USE university;
 
 
-INSERT INTO
-    faculty (name)
+INSERT INTO faculty
+    (name)
 VALUES
     ('ФИиВТ'),
     ('РТФ'),
     ('ФУП');
 
 
-INSERT INTO
-    `group` (name, faculty_id)
+INSERT INTO `group`
+    (name, faculty_id)
 VALUES
     ('ПС-11', 1),
     ('БИ-21', 1),
@@ -23,8 +23,9 @@ VALUES
     ('ИНВ-21', 3),
     ('МТ-32', 3);
 
-INSERT INTO
-    student (name, surname, age, `group_id`)
+
+INSERT INTO student
+    (name, surname, age, `group_id`)
 VALUES
     ('Ксения', 'Ильина', 18, 1),
     ('Кира', 'Захарова', 19, 1),
