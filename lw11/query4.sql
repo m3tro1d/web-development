@@ -1,7 +1,9 @@
 USE university;
 SELECT
-    faculty.name AS Факультет,
-    `group`.name AS Группа
+    student.name AS Name,
+    student.surname AS Surname,
+    faculty.name AS Faculty,
+    `group`.name AS `Group`
 FROM
     student
     JOIN `group` ON student.`group_id` = `group`.id
