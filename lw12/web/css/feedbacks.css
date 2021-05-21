@@ -1,0 +1,25 @@
+.page-feedbacks
+{
+    margin: 75px;
+}
+
+.contact-form__submit
+{
+    margin-top: 50px;
+}
+
+.feedback-result
+{
+    margin: 75px;
+    font: 20px/32px 'Open Sans', sans-serif;
+}
+
+.feedback-result_error
+{
+    color: #FF4040;
+}
+
+.rest__link
+{
+    margin-left: 75px;
+}
