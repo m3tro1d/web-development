@@ -42,18 +42,8 @@ class Database
         $stm->execute([
             ':email' => $email,
         ]);
-        $result = $stm->fetch();
-        if ($result)
-        {
-            $result = [
-                'name' => $result['name'],
-                'email' => $result['email'],
-                'country' => $result['country'],
-                'gender' => $result['gender'],
-                'message' => $result['message'],
-            ];
-            return $result;
-        }
-        return null;
+        $result = $stm->fetch(PDO::FETCH_ASSOC);
+        unset($result['id']);
+        return $result ? $result : null;
     }
 }
