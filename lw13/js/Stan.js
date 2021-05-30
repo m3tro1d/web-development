@@ -117,15 +117,15 @@ function drawStan() {
     ctx.strokeStyle = '#000000';
     ctx.lineWidth = 0.5;
     ctx.beginPath();
-    ctx.ellipse(148, 25, 1, 13, 5 * Math.PI / 6, 0, 2 * Math.PI);
+    ctx.ellipse(148, 25, 1, 13, 5 / 6 * Math.PI, 0, 2 * Math.PI);
     ctx.stroke();
     ctx.fill();
     ctx.beginPath();
-    ctx.ellipse(148, 25, 1, 13, 3 * Math.PI / 4, 0, 2 * Math.PI);
+    ctx.ellipse(148, 25, 1, 13, 3 / 4 * Math.PI, 0, 2 * Math.PI);
     ctx.stroke();
     ctx.fill();
     ctx.beginPath();
-    ctx.ellipse(148, 25, 1, 13, 5 * Math.PI / 8, 0, 2 * Math.PI);
+    ctx.ellipse(148, 25, 1, 13, 5 / 8 * Math.PI, 0, 2 * Math.PI);
     ctx.stroke();
     ctx.fill();
     ctx.beginPath();
@@ -145,7 +145,7 @@ function drawStan() {
     ctx.stroke();
     ctx.fill();
     ctx.beginPath();
-    ctx.ellipse(148, 25, 1, 13, 3 * Math.PI / 8, 0, 2 * Math.PI);
+    ctx.ellipse(148, 25, 1, 13, 3 / 8 * Math.PI, 0, 2 * Math.PI);
     ctx.stroke();
     ctx.fill();	
 
