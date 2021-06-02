@@ -9,7 +9,6 @@ function drawStan() {
 
   function drawLegs(ctx) {
     // Legs
-    ctx.beginPath();
     ctx.fillStyle = '#4278c8';
     ctx.fillRect(116, 180, 80, 15);
 
@@ -187,7 +186,6 @@ function drawStan() {
     ctx.fill();
 
     // Teeth
-    ctx.beginPath();
     ctx.strokeStyle = '#000000';
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(144, 123, 5, 3);
